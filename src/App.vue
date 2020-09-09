@@ -1,28 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="nav">
+      <router-link to="/home">Home</router-link>
+      <router-link to="/about">About</router-link>
+      <router-link to="/explore">Explore</router-link>
+      <router-link :to="userpage">Profile</router-link>
+      <router-link to="/login">Login</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { mapMutations, mapState } from 'vuex'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  computed: { 
+    ...mapState(['user', 'token']),
+    userpage() {
+      return `/profile/${this.user}`
+    },
+  },
+  methods: {
+    ...mapMutations(['setUser'])
+  },
+  created() {
+    if (localStorage.credtionals) {
+      const credtionals = JSON.parse(localStorage.credtionals)
+      this.setUser(credtionals)
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+
