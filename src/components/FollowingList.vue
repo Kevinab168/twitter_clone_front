@@ -21,13 +21,8 @@ export default {
     },
     methods: {
         async getFollowingList() {
-            const response = await fetch(`http://localhost:8000/api/follows?follower=${this.user}`, {
-                headers: {
-                    'Authorization': `Token ${this.token}`
-                }
-            })
-            const data = await response.json()
-            this.followedUsers = data
+            const response = await this.$http.get(`follows?follower=${this.user}`)
+            this.followedUsers = response.data
         }
     },
     created() {

@@ -26,25 +26,13 @@ export default {
     methods: {
         async getPost() {
             const postID = this.$route.params.id
-            const response = await fetch(`http://localhost:8000/api/posts/${postID}`, {
-                method: 'GET', 
-                headers: {
-                    'Authorization': `Token ${this.token}`
-                    }
-            })
-            const post = await response.json()
-            this.post = post
+            const response = await this.$http.get(`posts/${postID}/`)
+            this.post = response.data
         },
         async getComments() {
             const postID = this.$route.params.id
-            const response = await fetch(`http://localhost:8000/api/posts/${postID}/comments`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Token ${this.token}`
-                }
-            })
-            const comments = await response.json()
-            this.comments = comments
+            const response = await this.$http.get(`posts/${postID}/comments/`)
+            this.comments = response.data
         },
         addNewComment(comment) {
             this.comments.unshift(comment)

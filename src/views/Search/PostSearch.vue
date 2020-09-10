@@ -18,10 +18,9 @@ export default {
     computed: {
         ...mapState(['searchQuery']),
     },
-    created() {
-        fetch(`http://localhost:8000/api/posts?search=${this.searchQuery}`)
-            .then(response => response.json())
-            .then(data => this.posts = data)
+    async created() {
+        const response = await this.$http.get(`posts?search=${this.searchQuery}`)
+        this.posts = response.data
     }
 }
 </script>

@@ -8,6 +8,7 @@
 
 
 <script>
+// import { mapState } from 'vuex'
 // import { mapActions } from 'vuex'
 
 export default {
@@ -17,8 +18,16 @@ export default {
         password: '',
     }),
     methods: {
-        login() {
-            this.$store.dispatch('login', {username: this.username, password: this.password})
+        async login() {
+            const username = this.username
+            const response = await this.$http.post('login/', {
+                username: this.username,
+                password: this.password
+            })
+            const token = response.data.token 
+            const userID = response.data.id
+            this.$http.defaults.headers.common['Authorization'] = token
+            this.$store.dispatch('login', {username, userID, token})
         }
     }
     

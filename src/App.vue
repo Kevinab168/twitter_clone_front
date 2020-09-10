@@ -24,11 +24,13 @@ export default {
     ...mapMutations(['setUser'])
   },
   created() {
-    if (localStorage.credtionals) {
-      const credtionals = JSON.parse(localStorage.credtionals)
-      this.setUser(credtionals)
+    if (localStorage.credentials) {
+      const credentials = JSON.parse(localStorage.credentials)
+      this.setUser(credentials)
+      this.$http.defaults.headers.common['Authorization'] = credentials.token
     }
-  }
+  },
+  
 }
 </script>
 

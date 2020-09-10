@@ -17,20 +17,12 @@ export default {
     },
     methods: {
         async createNewComment() {
-            const response = await fetch('http://localhost:8000/api/comments/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json', 
-                    'Authorization': `Token ${this.token}`
-                },
-                body: JSON.stringify({
-                    comment_content: this.commentText,
-                    post: this.$route.params.id,
-                    user: this.userID
-                })
+            const response = await this.$http.post('comments/', {
+                comment_content: this.commentText,
+                post: this.$route.params.id,
+                user: this.userID
             })
-            const comment = await response.json()
-            this.$emit('createComment', comment)
+            this.$emit('createComment', response.data)
         }
     }
 }

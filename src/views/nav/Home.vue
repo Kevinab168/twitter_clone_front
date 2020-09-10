@@ -25,14 +25,8 @@ export default {
   },
   methods: {
     async getPosts() {
-      const response = await fetch(`http://localhost:8000/api/users/${this.userID}/posts/`, {
-          method: 'GET',
-          headers: {
-              'Authorization': `Token ${this.token}`
-          }
-      })
-      const json = await response.json()
-      this.posts = json
+      const response = await this.$http.get(`/users/${this.userID}/posts/`)
+      this.posts = response.data
     },
     addNewPost(post) {
       this.posts.unshift(post)

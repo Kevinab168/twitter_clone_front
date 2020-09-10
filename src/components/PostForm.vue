@@ -14,19 +14,12 @@ export default {
     }),
     methods: {
         async submitPost() {
-            const response = await fetch('http://localhost:8000/api/posts/', {
-                method: 'POST',
-                body: JSON.stringify({
-                    content: this.userTextContent,
-                    user: this.userID
-                }),
-                headers: {
-                    'Authorization': `Token ${this.token}`,
-                    'Content-type': 'application/json'
-                }
+            const response = await this.$http.post(`posts/`, {
+                content: this.userTextContent,
+                user: this.userID
             })
-            const data = await response.json()
-            this.$emit('createdPost', data) 
+            console.log(response)
+            this.$emit('createdPost', response.data) 
         },
     },
     computed: {
