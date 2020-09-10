@@ -7,8 +7,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import PostList from '../../components/PostList.vue'
-import PostForm from '../../components/PostForm.vue'
+import PostList from '@/components/PostList.vue'
+import PostForm from '@/components/PostForm.vue'
 export default {
   name: 'Home',
   components: {

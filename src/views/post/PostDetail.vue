@@ -9,9 +9,9 @@
 
 <script>
 import { mapState } from 'vuex'
-import Post from '../../components/Post.vue'
-import Comment from '../../components/Comment.vue'
-import CommentForm from '../../components/CommentForm.vue'
+import Post from '@/components/Post.vue'
+import Comment from '@/components/Comment.vue'
+import CommentForm from '@/components/CommentForm.vue'
 
 export default {
     components: {

@@ -6,7 +6,7 @@
 
 
 <script>
-import PostList from '../../components/PostList.vue'
+import PostList from '@/components/PostList.vue'
 import { mapState } from 'vuex'
 export default {
     components: {

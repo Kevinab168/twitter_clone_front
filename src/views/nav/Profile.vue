@@ -8,8 +8,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import FollowerList from '../../components/FollowerList.vue'
-import FollowingList from '../../components/FollowingList.vue'
+import FollowerList from '@/components/FollowerList.vue'
+import FollowingList from '@/components/FollowingList.vue'
 export default {
     components: {
         FollowerList,

@@ -6,7 +6,7 @@
 
 
 <script>
-import CommentList from '../../components/CommentList.vue'
+import CommentList from '@/components/CommentList.vue'
 import { mapState } from 'vuex'
 export default {
     components: {
