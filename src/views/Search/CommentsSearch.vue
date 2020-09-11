@@ -7,7 +7,6 @@
 
 <script>
 import CommentList from '@/components/CommentList.vue'
-import { mapState } from 'vuex'
 export default {
     components: {
         CommentList
@@ -15,11 +14,9 @@ export default {
     data: () => ({
         comments: []
     }),
-    computed: {
-        ...mapState(['searchQuery']),
-    },
+    props: ['search'],
     async created() {
-        const response = await this.$http.get(`comments?search=${this.searchQuery}`)
+        const response = await this.$http.get(`comments?search=${this.search}`)
         this.comments = response.data
     }
 }

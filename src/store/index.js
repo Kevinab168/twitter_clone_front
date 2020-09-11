@@ -8,7 +8,6 @@ export default new Vuex.Store({
     user: null,
     userID: null,
     token: '',
-    searchQuery: null
   },
   mutations: {
     setUser(state, {username, userID, token}) {
@@ -16,9 +15,6 @@ export default new Vuex.Store({
       state.userID = userID
       state.token = token
     },
-    setSearchQuery(state, query) {
-      state.searchQuery = query
-    }
   },
   actions: {
     async login(context, credentials) {

@@ -7,7 +7,6 @@
 
 <script>
 import PostList from '@/components/PostList.vue'
-import { mapState } from 'vuex'
 export default {
     components: {
         PostList
@@ -15,11 +14,9 @@ export default {
     data: () => ({
         posts: []
     }),
-    computed: {
-        ...mapState(['searchQuery']),
-    },
+    props: ['search'],
     async created() {
-        const response = await this.$http.get(`posts?search=${this.searchQuery}`)
+        const response = await this.$http.get(`posts?search=${this.search}`)
         this.posts = response.data
     }
 }

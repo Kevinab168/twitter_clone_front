@@ -15,7 +15,6 @@ export default {
     methods: {
         setSearchQuery() {
             this.$store.commit('setSearchQuery', this.searchQuery)
-            this.$router.push('search')
         }
     }
 }
