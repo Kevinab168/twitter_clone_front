@@ -1,5 +1,10 @@
 <template>
     <div>
+        <v-row>
+            <v-col>
+               <p>Followers:</p> 
+            </v-col>
+        </v-row>
         <p>Followers:</p>
         <Follower v-for="follower in followers" :follower="follower.follower" :key="follower.id"></Follower>
     </div>

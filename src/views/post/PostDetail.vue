@@ -3,7 +3,7 @@
         <CommentForm @createComment="addNewComment"></CommentForm>
         <v-row>
             <v-col>
-                  <v-card dark color="#5E89A1" :to="link" class="mx-auto" max-width="400">
+                  <v-card dark color="#5E89A1"  class="mx-auto" max-width="400">
                       <v-card-title>
                           <v-icon large left>
                               mdi-perm_identity

@@ -1,10 +1,30 @@
 <template>
     <div>
-        <div>
-            <input type="text" v-model="search">
-        </div>
-        <button v-for="tab in tabs" :key="tab" @click="currentTab = tab">{{ tab }}</button>
-        <component v-bind:is="currentTabComponent" class="tab" :search="search" :key="search"></component>
+        <v-row>
+            <v-col>
+                <v-text-field
+                    placeholder="Search"
+                    v-model="search"
+                    prepend-icon="mdi-magnify"
+                ></v-text-field>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col  
+                class="mx-auto" 
+                v-for="tab in tabs" 
+                :key="tab" 
+                cols="3"
+                >
+                    <v-btn block @click="currentTab = tab" large>{{ tab }}</v-btn>
+            </v-col>
+           
+        </v-row>
+        <v-row>
+            <v-col>
+                <component v-bind:is="currentTabComponent" :search="search" :key="search"></component>
+            </v-col>
+        </v-row>
     </div>
 </template>
 

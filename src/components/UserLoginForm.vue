@@ -1,8 +1,38 @@
 <template>
     <div>
-        <input type="text" v-model="username">
-        <input type="password" v-model="password">
-        <button @click="login">Log In</button>
+        <v-row>
+            <v-col cols="6">
+                <v-text-field class="mx-auto"
+                v-model="username"
+                clearable
+                placeholder="Username"
+                prepend-icon=""
+            ></v-text-field>
+            </v-col>
+        </v-row>
+        <v-row>
+              <v-col cols="6">
+                <v-text-field class="mx-auto"
+                v-model="password"
+                type="password"
+                clearable
+                placeholder="Password"
+            ></v-text-field>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col>
+                <v-btn 
+                large 
+                class="mx-auto" 
+                dark 
+                color="primary"
+                >
+                    <v-icon left>mdi-login</v-icon>
+                    <span>Login</span>
+                </v-btn>
+            </v-col>
+        </v-row>
     </div>
 </template>
 

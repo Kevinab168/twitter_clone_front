@@ -2,7 +2,7 @@
     <div>
         <v-row>
             <v-col>
-                  <v-card dark color="#A15E89" :to="link" class="mx-auto" max-width="400">
+                  <v-card dark color="#A15E89" class="mx-auto" max-width="400">
                       <v-card-title>
                           <v-icon large left>
                               mdi-perm_identity

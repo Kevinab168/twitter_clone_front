@@ -1,30 +1,65 @@
 <template>
   <v-app>
     <div id="app">
-      <v-app-bar app dark color="#FF6347" dense>
-        <v-toolbar-title>Chirper</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <router-link to="/home">
-            <v-btn icon>
-              <v-icon class="mx-3">mdi-home</v-icon>
-            </v-btn>
-        </router-link>
-        <router-link to="/explore">
-            <v-btn icon>
-              <v-icon class="mx-3">mdi-magnify</v-icon>
-            </v-btn>
-        </router-link>
-        <router-link to="/profile">
-            <v-btn icon>
-              <v-icon class="mx-3">mdi-account-box</v-icon>
-            </v-btn>
-        </router-link>
-        <router-link to="/login">
-            <v-btn icon>
-              <v-icon class="mx-3">mdi-login</v-icon>
-            </v-btn>
-        </router-link>
-      </v-app-bar>
+      <v-navigation-drawer class="deep-purple accent-4" dark app>
+        <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title">
+            Chirper
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            Welcome {{ user }}
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list
+        dense
+        nav
+      >
+        <v-list-item to="/home">
+          <v-list-item-icon>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
+        <v-list-item to="/explore">
+          <v-list-item-icon>
+            <v-icon>mdi-magnify</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Search</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
+        <v-list-item :to="userpage">
+          <v-list-item-icon>
+            <v-icon>mdi-account-box</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Profile</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
+        <v-list-item to="/login">
+          <v-list-item-icon>
+            <v-icon>mdi-login</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Login</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+      </v-navigation-drawer>
       <v-main>
         <v-container fluid>
             <router-view></router-view>
@@ -40,9 +75,12 @@ export default {
   computed: { 
     ...mapState(['user', 'token']),
     userpage() {
-      return `/profile/${this.user}`
+      return `/profile/${this.userID}`
     },
   },
+  data: () => ({
+    routes: []
+  }),
   methods: {
     ...mapMutations(['setUser'])
   },

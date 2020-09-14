@@ -4,10 +4,9 @@
             <v-col>
                   <v-card dark color="#5E89A1" :to="link" class="mx-auto" max-width="400">
                       <v-card-title>
-                          <v-icon large left>
-                              mdi-perm_identity
-                          </v-icon>
-                          <span class="title">User</span>
+                          <v-avatar color="blue">
+                              <span class="white--text headline">TT</span>
+                          </v-avatar>
                       </v-card-title>
                       <v-card-text>
                           <span>"{{ post.content }}"</span>
