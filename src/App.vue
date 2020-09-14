@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <div id="app">
-      <v-app-bar app dark dense>
+      <v-app-bar app dark color="#FF6347" dense>
         <v-toolbar-title>Chirper</v-toolbar-title>
         <v-spacer></v-spacer>
         <router-link to="/home">
