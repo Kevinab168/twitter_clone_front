@@ -1,10 +1,26 @@
 <template>
-    <div>
-        <input type="text" name="comment" id="comment" v-model="commentText">
-        <button @click="createNewComment">Create a new comment</button>
+    <div >
+        <v-row>
+            <v-col>
+                <v-card width="400"  class="mx-auto">
+                    <v-card-title>
+                        Make a Comment
+                    </v-card-title>
+                    <v-card-text>
+                        <v-textarea solo  maxlength="100" flat auto-grow dense v-model="commentText"></v-textarea>
+                    </v-card-text>
+                    <v-card-actions>
+                          <v-row align="center" justify="end">
+                              <v-btn icon class="mr-4" @click="createNewComment">
+                                <v-icon >mdi-comment</v-icon>
+                              </v-btn>
+                          </v-row>
+                      </v-card-actions>
+                </v-card>
+            </v-col>
+        </v-row>
     </div>
 </template>
-
 <script>
 import {  mapState } from 'vuex'
 export default {

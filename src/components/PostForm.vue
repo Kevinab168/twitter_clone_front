@@ -1,7 +1,24 @@
 <template>
-    <div>
-        <input type="text" v-model="userTextContent">
-        <button @click="submitPost">Create Post</button>
+    <div >
+        <v-row>
+            <v-col>
+                <v-card width="400"  class="mx-auto">
+                    <v-card-title>
+                        Write Something
+                    </v-card-title>
+                    <v-card-text>
+                        <v-textarea solo flat auto-grow dense v-model="userTextContent"></v-textarea>
+                    </v-card-text>
+                    <v-card-actions>
+                          <v-row align="center" justify="end">
+                              <v-btn icon class="mr-4" @click="submitPost">
+                                <v-icon >mdi-pencil</v-icon>
+                              </v-btn>
+                          </v-row>
+                      </v-card-actions>
+                </v-card>
+            </v-col>
+        </v-row>
     </div>
 </template>
 

@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-      <PostForm @createdPost="addNewPost"></PostForm>
-      <PostList :posts="posts"></PostList>
+      <v-main>
+        <PostForm @createdPost="addNewPost"></PostForm>
+        <PostList :posts="posts"></PostList>
+      </v-main>
   </div>
 </template>
 

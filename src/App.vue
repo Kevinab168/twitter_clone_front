@@ -1,14 +1,37 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/home">Home</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link to="/explore">Explore</router-link>
-      <router-link :to="userpage">Profile</router-link>
-      <router-link to="/login">Login</router-link>
+  <v-app>
+    <div id="app">
+      <v-app-bar app dark dense>
+        <v-toolbar-title>Chirper</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <router-link to="/home">
+            <v-btn icon>
+              <v-icon class="mx-3">mdi-home</v-icon>
+            </v-btn>
+        </router-link>
+        <router-link to="/explore">
+            <v-btn icon>
+              <v-icon class="mx-3">mdi-magnify</v-icon>
+            </v-btn>
+        </router-link>
+        <router-link to="/profile">
+            <v-btn icon>
+              <v-icon class="mx-3">mdi-account-box</v-icon>
+            </v-btn>
+        </router-link>
+        <router-link to="/login">
+            <v-btn icon>
+              <v-icon class="mx-3">mdi-login</v-icon>
+            </v-btn>
+        </router-link>
+      </v-app-bar>
+      <v-main>
+        <v-container fluid>
+            <router-view></router-view>
+        </v-container>
+      </v-main>
     </div>
-    <router-view/>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -33,5 +56,3 @@ export default {
   
 }
 </script>
-
-
