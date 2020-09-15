@@ -73,7 +73,7 @@
 import { mapMutations, mapState } from 'vuex'
 export default {
   computed: { 
-    ...mapState(['user', 'token']),
+    ...mapState(['user', 'token', 'userID']),
     userpage() {
       return `/profile/${this.userID}`
     },
