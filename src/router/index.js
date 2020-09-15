@@ -28,7 +28,7 @@ Vue.use(VueRouter)
     component: Explore
   },
   {
-    path: '/profile/:username',
+    path: '/profile/:id',
     name: 'Profile',
     component: Profile
   },

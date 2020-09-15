@@ -6,7 +6,7 @@
             </v-avatar>
         </v-row>
         <v-row>
-            <v-subheader>{{ user }}</v-subheader>
+            <v-subheader>{{ user.username }}</v-subheader>
         </v-row>
         <v-row dense>
             <!-- About User -->
@@ -19,86 +19,86 @@
         </v-row>
         <v-row>
             <v-col>
-                <component v-bind:is="currentTabComponent" :key="currentTab"></component>
+                <v-tabs
+                    v-model="tab"
+                    grow
+                >
+                    <v-tab
+                        v-for="tabName in tabs"
+                        :key="tabName"
+                    >
+                        {{ tabName }}
+                    </v-tab>
+                </v-tabs>
+                <v-tabs-items
+                    v-model="tab"
+                >
+                    <v-tab-item>
+                        <v-card flat>
+                            <v-card-text>
+                                <PostList :posts="posts"></PostList>
+                            </v-card-text>
+                        </v-card>
+                    </v-tab-item>
+                    <v-tab-item>
+                        <v-card flat>
+                            <v-card-text>
+                                <CommentList :comments="comments"></CommentList>
+                            </v-card-text>
+                        </v-card>
+                    </v-tab-item>
+                </v-tabs-items>
             </v-col>
         </v-row>
-        <v-row>
-              <v-tabs
-                class="elevation-2"
-                dark
-                grow
-                >
-                    <v-tabs-slider></v-tabs-slider>
-
-                    <v-tab
-                        v-for="tab in tabs"
-                        :key="tab.name"
-                    >
-                        {{ tab.name }}
-                    </v-tab>
-            </v-tabs>
-        </v-row>
-        <v-row>
-            <component :is="currentTab"></component>
-        </v-row>
-        <!-- <FollowerList :user="user"></FollowerList>
-        <FollowingList :user="user"></FollowingList> -->
+   
     </div>
 </template>
 
 
 <script>
-import FollowerList from '@/components/FollowerList.vue'
-import FollowingList from '@/components/FollowingList.vue'
+// import FollowerList from '@/components/FollowerList.vue'
+// import FollowingList from '@/components/FollowingList.vue'
 import PostList from '@/components/PostList.vue'
 import CommentList from '@/components/CommentList.vue'
-import { mapState } from 'vuex'
 export default {
     components: {
-        FollowerList,
-        FollowingList,
+        // FollowerList,
+        // FollowingList,
         PostList,
         CommentList
     },
     data: () => ({
-        currentTab: null,
+        user: '',
         posts: [],
         comments: [],
+        tab: null,
         tabs: [
-            {
-                name: 'Posts',
-                action: 'PostList'
-            },
-            {
-                name: 'Comments',
-                action: 'more random stuff'
-            },
-            {
-                name: 'Followers',
-                action: 'follower action'
-            },
-            {
-                name: 'Following',
-                action: 'random'
-            }
+            'Posts', 'Comments'
         ]
     }),
-    computed:{
-        // Get user
-        ...mapState(['user', 'userID'])
-    },
     methods: {
-        currentTabComponent() {
-            return this.currentTab + 'List'
+        async getUser() {
+            const response = await this.$http.get(`users/${this.userid}`)
+            this.user = response.data
         },
         async getPosts() {
-            const response = await this.$http.get(`/users/${this.userID}/posts/`)
+            const response = await this.$http.get(`users/${this.userid}/posts`)
             this.posts = response.data
         },
+        async getComments() {
+            const response = await this.$http.get(`comments?user=${this.userid}`)
+            this.comments = response.data
+        }
     },
-    created() { 
+    computed: {
+        userid() {
+            return this.$route.params.id
+        }
+    },
+    created() {
+        this.getUser()
         this.getPosts()
+        this.getComments()
     }
-
 }
 </script>

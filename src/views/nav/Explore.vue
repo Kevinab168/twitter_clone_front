@@ -10,19 +10,39 @@
             </v-col>
         </v-row>
         <v-row>
-            <v-col  
-                class="mx-auto" 
-                v-for="tab in tabs" 
-                :key="tab" 
-                cols="3"
-                >
-                    <v-btn block @click="currentTab = tab" large>{{ tab }}</v-btn>
-            </v-col>
-           
-        </v-row>
-        <v-row>
             <v-col>
-                <component v-bind:is="currentTabComponent" :search="search" :key="search"></component>
+                <v-tabs
+                    v-model="tab"
+                    grow
+                >
+                    <v-tab
+                        v-for="tabName in tabs"
+                        :key="tabName"
+                    >
+                        {{ tabName }}
+                    </v-tab>
+                </v-tabs>
+                <v-tabs-items
+                    v-model="tab"
+                >
+                    <v-tab-item
+                        v-for="tab in tabs"
+                        :key="tab"
+                    >
+                        <v-card flat>
+                            <v-card-text>
+                                <component :is="tab + 'Search'" :search="search" :key="search"></component>
+                            </v-card-text>
+                        </v-card>
+                    </v-tab-item>
+                    <v-tab-item>
+                        <v-card flat>
+                            <v-card-text>
+                                <CommentList :comments="comments"></CommentList>
+                            </v-card-text>
+                        </v-card>
+                    </v-tab-item>
+                </v-tabs-items>
             </v-col>
         </v-row>
     </div>
@@ -39,7 +59,7 @@ export default {
         CommentsSearch,
     },
     data: () => ({
-        currentTab: 'Users',
+        tab: null,
         tabs: ['Users', 'Posts', 'Comments'],
         search: null 
     }),
