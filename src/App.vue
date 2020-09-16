@@ -1,7 +1,11 @@
 <template>
   <v-app>
     <div id="app">
-      <v-navigation-drawer class="deep-purple accent-4" dark app>
+      <v-navigation-drawer 
+        class="deep-purple accent-4" 
+        dark
+        app
+        >
         <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">
@@ -61,8 +65,15 @@
       </v-list>
       </v-navigation-drawer>
       <v-main>
-        <v-container fluid>
-            <router-view></router-view>
+        <v-container fluid >
+            <v-row>
+              <v-col cols="8">
+                <router-view></router-view>
+              </v-col>
+              <v-col cols="4">
+                <AppSearch></AppSearch>
+              </v-col>
+            </v-row>
         </v-container>
       </v-main>
     </div>
@@ -71,6 +82,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex'
+import AppSearch from '@/components/AppSearch.vue'
 export default {
   computed: { 
     ...mapState(['user', 'token', 'userID']),
@@ -83,6 +95,9 @@ export default {
   }),
   methods: {
     ...mapMutations(['setUser'])
+  },
+  components: {
+    AppSearch
   },
   created() {
     if (localStorage.credentials) {

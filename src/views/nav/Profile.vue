@@ -6,7 +6,7 @@
             </v-avatar>
         </v-row>
         <v-row>
-            <v-subheader>{{ user.username }}</v-subheader>
+            <v-subheader>{{ username }}</v-subheader>
         </v-row>
         <v-row dense>
             <!-- About User -->
@@ -47,6 +47,20 @@
                             </v-card-text>
                         </v-card>
                     </v-tab-item>
+                    <v-tab-item>
+                        <v-card flat>
+                            <v-card-text>
+                                <FollowerList :followers="followers"></FollowerList>
+                            </v-card-text>
+                        </v-card>
+                    </v-tab-item>
+                    <v-tab-item>
+                        <v-card flat>
+                            <v-card-text>
+                                <FollowingList :follows="following"></FollowingList>
+                            </v-card-text>
+                        </v-card>
+                    </v-tab-item>
                 </v-tabs-items>
             </v-col>
         </v-row>
@@ -56,14 +70,14 @@
 
 
 <script>
-// import FollowerList from '@/components/FollowerList.vue'
-// import FollowingList from '@/components/FollowingList.vue'
+import FollowerList from '@/components/FollowerList.vue'
+import FollowingList from '@/components/FollowingList.vue'
 import PostList from '@/components/PostList.vue'
 import CommentList from '@/components/CommentList.vue'
 export default {
     components: {
-        // FollowerList,
-        // FollowingList,
+        FollowerList,
+        FollowingList,
         PostList,
         CommentList
     },
@@ -71,9 +85,11 @@ export default {
         user: '',
         posts: [],
         comments: [],
+        followers: [],
+        following: [],
         tab: null,
         tabs: [
-            'Posts', 'Comments'
+            'Posts', 'Comments', 'Followers', 'Follows'
         ]
     }),
     methods: {
@@ -88,17 +104,38 @@ export default {
         async getComments() {
             const response = await this.$http.get(`comments?user=${this.userid}`)
             this.comments = response.data
+        },
+        async getFollowers() {
+            const response = await this.$http.get(`follows?following=${this.userid}`)
+            this.followers = response.data
+        }, 
+        async getFollows() { 
+            const response = await this.$http.get(`follows?follower=${this.userid}`)
+            this.following = response.data
+        },
+        async pageSetup() {
+            this.getUser()
+            this.getPosts()
+            this.getComments()
+            this.getFollows()
+            this.getFollowers()
         }
     },
     computed: {
         userid() {
             return this.$route.params.id
+        },
+        username() {
+            return this.user.username
+        }
+    },
+    watch: {
+        '$route.params.id': function() {
+            this.pageSetup()
         }
     },
     created() {
-        this.getUser()
-        this.getPosts()
-        this.getComments()
+        this.pageSetup()
     }
 }
 </script>

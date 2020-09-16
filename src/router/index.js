@@ -23,7 +23,7 @@ Vue.use(VueRouter)
     component: () => import(/* webpackChunkName: "about" */ '../views/nav/About.vue')
   },
   {
-    path: '/explore',
+    path: '/explore/:search?',
     name: 'Explore',
     component: Explore
   },

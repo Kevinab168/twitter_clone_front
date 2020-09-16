@@ -35,13 +35,6 @@
                             </v-card-text>
                         </v-card>
                     </v-tab-item>
-                    <v-tab-item>
-                        <v-card flat>
-                            <v-card-text>
-                                <CommentList :comments="comments"></CommentList>
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
                 </v-tabs-items>
             </v-col>
         </v-row>
@@ -66,6 +59,22 @@ export default {
     computed: {
         currentTabComponent: function() {
             return this.currentTab + 'Search'
+        },
+    },
+    methods: {
+        checkSearchRoute() {
+            const searchQuery = this.$route.params.search
+            if (searchQuery) {
+                this.search = searchQuery
+            }
+        }
+    },
+    created() {
+        this.checkSearchRoute()
+    },
+    watch: {
+        '$route.params.search': function() {
+            this.checkSearchRoute()
         }
     }
 }

@@ -1,33 +1,25 @@
 <template>
     <div>
-        Following: <Following v-for="followedUser in followedUsers" :following="followedUser.following" :key="followedUser.id"></Following>
+        <v-row>
+            <v-col>
+                <User
+                    v-for="follow in follows"
+                    :key="follow.id"
+                    :user="follow.following"
+                ></User>
+            </v-col>
+        </v-row>
+        <!-- Following: <Following v-for="followedUser in followedUsers" :following="followedUser.following" :key="followedUser.id"></Following> -->
     </div>
 </template>
 
 
 <script>
-import Following from './Following.vue'
-import { mapState } from 'vuex'
+import User from './User.vue'
 export default {
     components: {
-        Following
+        User
     },
-    data: () => ({
-        followedUsers: []
-    }),
-    props: ['user'],
-    computed: {
-        ...mapState(['token'])
-    },
-    methods: {
-        async getFollowingList() {
-            const response = await this.$http.get(`follows?follower=${this.user}`)
-            this.followedUsers = response.data
-        }
-    },
-    created() {
-        this.getFollowingList()
-        console.log('You got to this point')
-    }
+    props: ['follows'],
 }
 </script>

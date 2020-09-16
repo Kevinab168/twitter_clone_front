@@ -2,32 +2,23 @@
     <div>
         <v-row>
             <v-col>
-               <p>Followers:</p> 
+                <User
+                    v-for="follower in followers"
+                    :key="follower.id"
+                    :user="follower.follower"
+                ></User>
             </v-col>
         </v-row>
-        <p>Followers:</p>
-        <Follower v-for="follower in followers" :follower="follower.follower" :key="follower.id"></Follower>
     </div>
 </template>
 
 
 <script>
-import Follower from './Follower.vue'
-import { mapState } from 'vuex'
+import User from './User.vue'
 export default {
     components: {
-        Follower
+        User
     },
-    data: () => ({
-        followers: []
-    }),
-    computed: {
-        ...mapState(['token'])
-    },
-    props: ['user'],
-    async created() {
-        const response = await this.$http.get(`follows?following=${this.user}`)
-        this.followers = response.data
-    }
+    props: ['followers']
 }
 </script>
