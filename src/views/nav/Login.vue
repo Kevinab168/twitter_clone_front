@@ -1,6 +1,10 @@
 <template>
     <div>
-        <UserLoginForm></UserLoginForm>
+        <v-row>
+            <v-col align-self="end">
+                <UserLoginForm></UserLoginForm>
+            </v-col>
+        </v-row>
     </div>
 </template>
 

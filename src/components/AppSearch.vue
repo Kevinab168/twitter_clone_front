@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <v-text-field 
             solo
             v-model="search" 
@@ -21,7 +20,10 @@ export default {
     methods: {
         makeSearchQuery() {
             this.$router.push(`/explore/${this.search}`)
+        },
+        checkRouterPath() {
+            return false
         }
-    }
+    },
 }
 </script>

@@ -65,13 +65,13 @@
       </v-list>
       </v-navigation-drawer>
       <v-main>
-        <v-container fluid >
+        <v-container fluid>
             <v-row>
               <v-col cols="8">
                 <router-view></router-view>
               </v-col>
               <v-col cols="4">
-                <AppSearch></AppSearch>
+                <AppSearch v-if="ensureNotSearch()"></AppSearch>
               </v-col>
             </v-row>
         </v-container>
@@ -94,7 +94,11 @@ export default {
     routes: []
   }),
   methods: {
-    ...mapMutations(['setUser'])
+    ...mapMutations(['setUser']),
+    ensureNotSearch() {
+      const routePath = this.$route.path
+      return !(routePath.includes('explore'))
+    }
   },
   components: {
     AppSearch
