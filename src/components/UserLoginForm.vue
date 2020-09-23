@@ -50,16 +50,16 @@ export default {
     }),
     methods: {
         async login() {
-            // const username = this.username
-            // const response = await this.$http.post('login/', {
-            //     username: this.username,
-            //     password: this.password
-            // })
-            // const token = response.data.token 
-            // const userID = response.data.id
-            // this.$http.defaults.headers.common['Authorization'] = token
-            // console.log('Logged In')
-            // this.$store.dispatch('login', {username, userID, token})
+            const username = this.username
+            const response = await this.$http.post('login/', {
+                username: this.username,
+                password: this.password
+            })
+            const token = response.data.token 
+            const userID = response.data.id
+            this.$http.defaults.headers.common['Authorization'] = token
+            console.log('Logged In')
+            this.$store.dispatch('login', {username, userID, token})
             this.$router.push('/home')
         }
     }
