@@ -4,6 +4,7 @@
             <v-col cols="6">
                 <v-text-field class="mx-auto"
                 v-model="username"
+                data-test="name-input"
                 clearable
                 placeholder="Username"
                 prepend-icon=""
@@ -14,6 +15,7 @@
               <v-col cols="6">
                 <v-text-field class="mx-auto"
                 v-model="password"
+                data-test="password-input"
                 type="password"
                 clearable
                 placeholder="Password"
@@ -24,9 +26,11 @@
             <v-col>
                 <v-btn 
                 large 
+                data-test="login-btn"
                 class="mx-auto" 
                 dark 
                 color="primary"
+                @click="login"
                 >
                     <v-icon left>mdi-login</v-icon>
                     <span>Login</span>
@@ -54,7 +58,9 @@ export default {
             const token = response.data.token 
             const userID = response.data.id
             this.$http.defaults.headers.common['Authorization'] = token
+            console.log('Logged In')
             this.$store.dispatch('login', {username, userID, token})
+            this.$router.push('/home')
         }
     }
     
