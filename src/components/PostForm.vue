@@ -7,11 +7,13 @@
                         Write Something
                     </v-card-title>
                     <v-card-text>
-                        <v-textarea solo flat auto-grow dense v-model="userTextContent"></v-textarea>
+                        <v-textarea solo flat auto-grow dense 
+                        data-test="post-content-box"
+                        v-model="userTextContent"></v-textarea>
                     </v-card-text>
                     <v-card-actions>
                           <v-row align="center" justify="end">
-                              <v-btn icon class="mr-4" @click="submitPost">
+                              <v-btn icon class="mr-4" data-test="make-post-button" @click="submitPost">
                                 <v-icon >mdi-pencil</v-icon>
                               </v-btn>
                           </v-row>

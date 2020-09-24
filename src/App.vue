@@ -4,6 +4,7 @@
       <v-navigation-drawer 
         class="deep-purple accent-4" 
         dark
+        permanent
         app
         >
         <v-list-item>
@@ -23,7 +24,7 @@
         dense
         nav
       >
-        <v-list-item to="/home">
+        <v-list-item to="/home" data-test="home-nav">
           <v-list-item-icon>
             <v-icon>mdi-home</v-icon>
           </v-list-item-icon>
@@ -33,7 +34,7 @@
           </v-list-item-content>
         </v-list-item>
         
-        <v-list-item to="/explore">
+        <v-list-item to="/explore" data-test="explore-nav">
           <v-list-item-icon>
             <v-icon>mdi-magnify</v-icon>
           </v-list-item-icon>
@@ -43,7 +44,7 @@
           </v-list-item-content>
         </v-list-item>
         
-        <v-list-item :to="userpage">
+        <v-list-item :to="userpage" data-test="profile-nav">
           <v-list-item-icon>
             <v-icon>mdi-account-box</v-icon>
           </v-list-item-icon>
@@ -53,7 +54,7 @@
           </v-list-item-content>
         </v-list-item>
         
-        <v-list-item to="/login">
+        <v-list-item to="/login" data-test="login-nav">
           <v-list-item-icon>
             <v-icon>mdi-login</v-icon>
           </v-list-item-icon>

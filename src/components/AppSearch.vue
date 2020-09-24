@@ -4,6 +4,7 @@
             solo
             v-model="search" 
             rounded
+            data-test="right-search-field"
             placeholder="Search"
             prepend-icon="mdi-magnify" 
             @keyup.enter="makeSearchQuery"

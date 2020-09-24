@@ -4,6 +4,7 @@
             <v-col>
                 <v-text-field
                     placeholder="Search"
+                    data-test="search-input-box"
                     v-model="search"
                     prepend-icon="mdi-magnify"
                 ></v-text-field>
@@ -17,6 +18,7 @@
                 >
                     <v-tab
                         v-for="tabName in tabs"
+                        :data-test="dataTest[tabName]"
                         :key="tabName"
                     >
                         {{ tabName }}
@@ -28,10 +30,11 @@
                     <v-tab-item
                         v-for="tab in tabs"
                         :key="tab"
+                        
                     >
                         <v-card flat>
                             <v-card-text>
-                                <component :is="tab + 'Search'" :search="search" :key="search"></component>
+                                <component :data-test="dataTestSearch[tab]" :is="tab + 'Search'" :search="search" :key="search"></component>
                             </v-card-text>
                         </v-card>
                     </v-tab-item>
@@ -54,7 +57,17 @@ export default {
     data: () => ({
         tab: null,
         tabs: ['Users', 'Posts', 'Comments'],
-        search: null 
+        search: null,
+        dataTest: {
+            'Users': 'user-tab-box',
+            'Posts': 'post-tab-box',
+            'Comments': 'comment-tab-box'
+        },
+        dataTestSearch: {
+            'Users': 'user-search-result',
+            'Posts': 'post-search-result',
+            'Comments': 'comment-search-result'
+        }
     }),
     computed: {
         currentTabComponent: function() {

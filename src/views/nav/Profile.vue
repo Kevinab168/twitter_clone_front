@@ -2,7 +2,7 @@
     <div>
         <v-row>
             <v-avatar color="indigo" class="ml-3">
-                <span class="white--text headline">AD</span>
+                <span  data-test="user-avatar" class="white--text headline">AD</span>
             </v-avatar>
         </v-row>
         <v-row>
@@ -10,7 +10,7 @@
         </v-row>
         <v-row dense>
             <!-- About User -->
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aut dignissimos quisquam aperiam consequatur rem ex ratione labore, enim temporibus delectus, eum, nobis ullam architecto atque quaerat! Ab ut praesentium aspernatur sequi? Excepturi, minus.</p>
+            <p data-test="user-bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aut dignissimos quisquam aperiam consequatur rem ex ratione labore, enim temporibus delectus, eum, nobis ullam architecto atque quaerat! Ab ut praesentium aspernatur sequi? Excepturi, minus.</p>
         </v-row>
         <v-row>
             <v-col>
@@ -25,6 +25,7 @@
                 >
                     <v-tab
                         v-for="tabName in tabs"
+                        :data-test="dataTest[tabName]"
                         :key="tabName"
                     >
                         {{ tabName }}
@@ -90,7 +91,13 @@ export default {
         tab: null,
         tabs: [
             'Posts', 'Comments', 'Followers', 'Follows'
-        ]
+        ],
+        dataTest: {
+            'Posts': 'posts-tab-box',
+            'Comments': 'comments-tab-box',
+            'Followers': 'followers-tab-box',
+            'Follows': 'follows-tab-box'
+        }
     }),
     methods: {
         async getUser() {

@@ -9,7 +9,7 @@
                           </v-avatar>
                       </v-card-title>
                       <v-card-text>
-                          <span>"{{ post.content }}"</span>
+                          <span data-test="post-item">"{{ post.content }}"</span>
                           <v-spacer></v-spacer>
                       </v-card-text>
                       <v-card-actions>
