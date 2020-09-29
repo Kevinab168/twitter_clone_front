@@ -23,6 +23,7 @@ describe('Navbar', () => {
     cy.get('[data-test="login-nav"]').click()
     cy.url().should('match', /login/)
   })
+  it('check from explore home')
 })
 
 describe('Homepage', () => {
