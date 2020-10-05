@@ -7,7 +7,7 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios.create({
-  baseURL: 'http://www.chirper.org/api',
+  baseURL: 'https://www.chirper.org/api',
 })
 
 new Vue({
