@@ -26,7 +26,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: kevinab168/twitter_clone/frontend
+          repository: kevinab168/twitter_clone_front/frontend
           tag_with_ref: true
   deploy:
     needs: push_to_registry
@@ -49,6 +49,6 @@ jobs:
           docker-compose down
           docker image prune
           docker login https://docker.pkg.github.com -u $DOCKER_USER -p $DOCKER_PASS
-          docker pull docker.pkg.github.com/kevinab168/twitter_clone/frontend:latest
+          docker pull docker.pkg.github.com/kevinab168/twitter_clone_front/frontend:latest
           docker-compose build 
           docker-compose up -d
