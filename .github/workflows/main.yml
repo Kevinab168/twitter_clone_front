@@ -10,6 +10,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           browser: chrome
+          headless: true
           start: npm run test:e2e
 
   push_to_registry:
