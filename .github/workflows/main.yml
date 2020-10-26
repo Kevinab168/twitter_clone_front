@@ -1,5 +1,5 @@
 name: E2E test
-on: [push]
+on: push
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -11,3 +11,43 @@ jobs:
         with:
           browser: chrome
           start: npm run test:e2e
+
+  push_to_registry:
+    needs: cypress-run
+    name: Push Docker image to GitHub Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: kevinab168/twitter_clone/frontend
+          tag_with_ref: true
+  deploy:
+    needs: push_to_registry
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      env:
+        DOCKER_USER: ${{ github.actor }}
+        DOCKER_PASS: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        envs: DOCKER_USER, DOCKER_PASS
+        script: |
+          cd ~
+          docker-compose down
+          docker image prune
+          docker login https://docker.pkg.github.com -u $DOCKER_USER -p $DOCKER_PASS
+          docker pull docker.pkg.github.com/kevinab168/twitter_clone/frontend:latest
+          docker-compose build 
+          docker-compose up -d
