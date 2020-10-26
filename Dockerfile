@@ -1,5 +1,6 @@
-FROM node:10
+FROM node:latest as build-stage
 WORKDIR /twitter_frontend
-COPY . /twitter_frontend
+COPY package*.json ./
 RUN npm install --production
-CMD [ "npm", "run", "build" ]
+COPY ./ .
+RUN npm run build
