@@ -1,6 +1,6 @@
-FROM node:latest as build-stage
-WORKDIR /twitter_frontend
+FROM node:lts-alpine
+WORKDIR /twitter_clone_front
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm install 
 COPY . .
-CMD ["npm", "run", "build"]
+RUN npm run build
