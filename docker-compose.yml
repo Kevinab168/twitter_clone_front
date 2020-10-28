@@ -5,12 +5,8 @@ services:
             - "8000:8000"
         volumes:
             - backend_static:/twitter_clone/static
-    frontend:
-        build: ./twitter_frontend/twitter_clone_front
-        volumes:
-            - frontend_static:/twitter_frontend/dist
-    nginx: 
-        image: nginx
+    frontend: 
+        image: docker pull docker.pkg.github.com/kevinab168/twitter_clone_front/frontend:latest
         ports: 
             - "80:80"
             - "443:443"
@@ -21,4 +17,3 @@ services:
             - backend_static:/usr/share/nginx/backend_static
 volumes: 
     backend_static:
-    frontend_static:
