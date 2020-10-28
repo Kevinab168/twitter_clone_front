@@ -60,6 +60,6 @@ jobs:
           docker-compose down
           docker image prune
           docker login https://docker.pkg.github.com -u $DOCKER_USER -p $DOCKER_PASS
-          docker-compose pull
+          docker-compose pull docker.pkg.github.com/kevinab168/twitter_clone_front/frontend 
           docker-compose build 
           docker-compose up -d
